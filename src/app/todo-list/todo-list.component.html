@@ -14,7 +14,7 @@
     <td>{{ item.description }}</td>
     <td>{{ item.isDone }}</td>
     <td>
-      <button (click)="markdone(item.id)" [disabled]="item.isDone">Done</button>
+      <button (click)="markdone(item)" [disabled]="item.isDone">Done</button>
       <button (click)="gotodetail(item.id)">Detail</button>
       <button>Delete</button>
       <button>Edit</button>

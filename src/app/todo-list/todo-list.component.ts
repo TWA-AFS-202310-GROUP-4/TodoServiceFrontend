@@ -16,11 +16,14 @@ export class TodoListComponent {
     private todohttpService: TodohttpService){}
   
   ngOnInit(){
-    // this.items = this.todoservice.getAll()
   this.refresh()
   }
-  markdone(id:number){
-    this.todoservice.markdone(id)
+  markdone(item:ToDoItem){
+    this.todohttpService.markdone(item).subscribe(item2 =>{
+      let  founditem = this.items.find(it => it.id === item2.id)
+      if(founditem)
+      founditem.isDone = item2.isDone
+    })
   }
 
   gotodetail(id: number){

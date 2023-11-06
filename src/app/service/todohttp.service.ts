@@ -20,4 +20,15 @@ export class TodohttpService {
       isDone:false
     })
   }
+  markdone(item: ToDoItem){
+    return this.httpClient.put<ToDoItem>('https://localhost:5001/ToDoItem',{
+      id:item.id,
+      title: item.title,
+      description: item.description,
+      isDone:item.isDone
+    },)
+  }
+  getDetailById(id: number){
+    return this.httpClient.get<ToDoItem>(`https://localhost:5001/ToDoItem/${id}`)
+  }
 }
