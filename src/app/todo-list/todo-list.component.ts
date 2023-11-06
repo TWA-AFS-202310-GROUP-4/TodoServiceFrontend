@@ -37,7 +37,7 @@ export class TodoListComponent {
     })
   }
   deleteById(id:number){
-    this.todohttpService.deleById(id).subscribe(()=>{
+    this.todohttpService.deletById(id).subscribe(()=>{
       this.refresh()
     })
   }

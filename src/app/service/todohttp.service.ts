@@ -14,7 +14,7 @@ export class TodohttpService {
   }
 
   create(title:string,description:string){
-    return this.httpClient.post('https://localhost:5001/ToDoItem',{
+    return this.httpClient.post<ToDoItem>('https://localhost:5001/ToDoItem',{
       title: title,
       description: description,
       isDone:false
@@ -32,7 +32,7 @@ export class TodohttpService {
     return this.httpClient.get<ToDoItem>(`https://localhost:5001/ToDoItem/${id}`)
   }
 
-  deleById(id:number){
+  deletById(id:number){
     return this.httpClient.delete<ToDoItem>(`https://localhost:5001/ToDoItem?id=${id}`)
   }
 }
