@@ -20,7 +20,7 @@ export class TodohttpService {
       isDone:false
     })
   }
-  markdone(item: ToDoItem){
+  updateItem(item: ToDoItem){
     return this.httpClient.put<ToDoItem>('https://localhost:5001/ToDoItem',{
       id:item.id,
       title: item.title,
@@ -30,5 +30,9 @@ export class TodohttpService {
   }
   getDetailById(id: number){
     return this.httpClient.get<ToDoItem>(`https://localhost:5001/ToDoItem/${id}`)
+  }
+
+  deleById(id:number){
+    return this.httpClient.delete<ToDoItem>(`https://localhost:5001/ToDoItem?id=${id}`)
   }
 }

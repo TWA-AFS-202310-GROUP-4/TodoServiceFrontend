@@ -16,8 +16,8 @@
     <td>
       <button (click)="markdone(item)" [disabled]="item.isDone">Done</button>
       <button (click)="gotodetail(item.id)">Detail</button>
-      <button>Delete</button>
-      <button>Edit</button>
+      <button (click)="deleteById(item.id)">Delete</button>
+      <button (click)="gotoedit(item.id)">Edit</button>
     </td>
   </tr>
 </table>
