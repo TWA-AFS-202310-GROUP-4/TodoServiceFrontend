@@ -1,8 +1,11 @@
+<h1>Todo Item Detail</h1>
 
-<h1>
-    Todo Item Detail
-</h1>
+<div *ngIf="item">
+  <div>id: {{ item.id }}</div>
 
-<div>
-    id: {{id}}
+  <div>title: {{ item.title }}</div>
+
+  <div>description: {{ item.description }}</div>
+
+  <div>isDone: {{ item.isDone }}</div>
 </div>
