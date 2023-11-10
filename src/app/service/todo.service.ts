@@ -24,4 +24,13 @@ export class TodoService {
   getAll() {
     return this.todoList;
   }
+
+  createNewItem(title: string, description: string) {
+    this.todoList.push({
+      id: this.todoList.length + 1,
+      title: title,
+      description: description,
+      isDone: false,
+    });
+  }
 }
