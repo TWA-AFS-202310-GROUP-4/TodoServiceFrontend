@@ -30,8 +30,7 @@ describe('TodoService', () => {
   });
 
   it('should create a new item when call create', () => {
-
-    service.create('buy','good');
+    service.create('buy', 'good');
     expect(service.items).toEqual([
       { id: 1, title: 'buy milk', description: 'yummy', isDone: false },
       { id: 2, title: 'buy', description: 'good', isDone: false },
@@ -39,10 +38,7 @@ describe('TodoService', () => {
   });
 
   it('should mark isDone true when call markdone', () => {
-
-    service. markDone(1);
+    service.markDone(1);
     expect(service.items[0].isDone).toEqual(true);
   });
-
-
 });
