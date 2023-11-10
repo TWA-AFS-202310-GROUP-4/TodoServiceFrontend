@@ -6,12 +6,18 @@
     <th>Title</th>
     <th>Description</th>
     <th>IsDone</th>
+    <th>Action</th>
+    
   </tr>
   <tr *ngFor="let item of items">
     <td>{{ item.id }}</td>
     <td>{{ item.title }}</td>
     <td>{{ item.description }}</td>
     <td>{{ item.isDone }}</td>
-    <button>Done</button>
+    <td>
+    <button (click)="markdown(item.id)"
+    [disabled]="item.isDone"
+    >Done</button>
+     </td>
   </tr>
 </table>
