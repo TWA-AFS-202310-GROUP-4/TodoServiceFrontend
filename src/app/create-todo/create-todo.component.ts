@@ -22,6 +22,7 @@ export class CreateTodoComponent {
     const formValues = this.toDoForm.value
     if (formValues.title && formValues.description) {
       this.todoService.create(formValues.title, formValues.description)
+      this.toDoForm.reset()
     }
     console.log(formValues)
   }
