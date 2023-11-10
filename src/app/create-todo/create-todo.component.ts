@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { TodoService } from '../service/todo.service';
 import { TodoHttpService } from '../service/todo-http.service';
@@ -9,6 +9,8 @@ import { TodoHttpService } from '../service/todo-http.service';
   styleUrls: ['./create-todo.component.css']
 })
 export class CreateTodoComponent {
+  @Output() created = new EventEmitter()
+  
   constructor(
     private formBuilder: FormBuilder,
     private todoService: TodoService,
@@ -24,9 +26,9 @@ export class CreateTodoComponent {
     const formValues = this.toDoForm.value
     if (formValues.title && formValues.description) {
       this.todoHttpService.create(formValues.title,formValues.description).subscribe(() =>{
-        this.toDoForm.reset
+        this.toDoForm.reset()
+        this.created.emit()
       })
     }
-    
   }
 }
