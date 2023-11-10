@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ToDoItem } from 'src/model/ToDoItem';
 import { TodoService } from '../service/todo.service';
 import { Router } from '@angular/router';
+import { TodoHttpService } from '../service/todo-http.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -9,10 +10,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./todo-list.component.css'],
 })
 export class TodoListComponent {
-  constructor(private todoService: TodoService, private router: Router) {}
+  constructor(
+    private todoService: TodoService,
+    private todoHttpService: TodoHttpService,
+    private router: Router
+  ) {}
   todoList: ToDoItem[] = [];
   ngOnInit() {
-    this.todoList = this.todoService.getAll();
+    this.todoHttpService.getAll().subscribe((res) => {
+      this.todoList = res;
+    });
   }
 
   onMarkDone(id: number) {
