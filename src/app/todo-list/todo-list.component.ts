@@ -8,11 +8,17 @@ import { TodoService } from '../service/todo.service';
   styleUrls: ['./todo-list.component.css'],
 })
 export class TodoListComponent {
-  items: ToDoItem[] = []
+  items: ToDoItem[] = [];
+  isDoneButtonDisable: boolean = true;
 
-  constructor(private todoService: TodoService){}
-  
-  ngOnInit(){
-    this.items = this.todoService.getAll()
+  constructor(private todoService: TodoService) {}
+
+  ngOnInit() {
+    this.items = this.todoService.getAll();
+  }
+
+  onDoneClick(item: ToDoItem) {
+    this.todoService.markDone(item.id);
+    this.isDoneButtonDisable = false;
   }
 }
