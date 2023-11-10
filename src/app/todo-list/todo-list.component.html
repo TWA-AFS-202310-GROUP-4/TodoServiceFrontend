@@ -1,26 +1,25 @@
-
 <h2>TodoList</h2>
 
 <table>
-    <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>IsDone</th>
-        <th>Action</th>
-    </tr>
-    <tr *ngFor="let item of itemsSubjector | async">
-        <td>{{item.id}}</td>
-        <td>{{item.title}}</td>
-        <td>{{item.description}}</td>
-        <td>{{item.isDone}}</td>
-        <td>
-            <button (click)="onDoneClick(item)" [disabled]="item.isDone">Done</button>
-            <button (click)="onGotoDetail(item.id)">View Detail</button>
-            <button (click)="onDeleteClick(item.id)">Delete</button>
-            <button (click)="onEditClick(item.id)">Edit</button>
-        </td>
-    </tr>
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>IsDone</th>
+    <th>Action</th>
+  </tr>
+  <tr *ngFor="let item of itemsSubjector | async">
+    <td>{{ item.id }}</td>
+    <td>{{ item.title }}</td>
+    <td>{{ item.description }}</td>
+    <td>{{ item.isDone }}</td>
+    <td>
+      <button (click)="onDoneClick(item)" [disabled]="item.isDone">Done</button>
+      <button (click)="onGotoDetail(item.id)">View Detail</button>
+      <button (click)="onDeleteClick(item.id)">Delete</button>
+      <button (click)="onEditClick(item.id)">Edit</button>
+    </td>
+  </tr>
 </table>
 
 <app-create-todo></app-create-todo>

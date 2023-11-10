@@ -7,7 +7,6 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class TodoService {
-  // items: ToDoItem[] = [];
   itemsSubjector: Subject<ToDoItem[]> = new Subject<ToDoItem[]>();
   constructor(private httpService: TodoHttpService) {}
 
@@ -17,7 +16,6 @@ export class TodoService {
 
   refreshList() {
     this.httpService.getAll().subscribe((items) => {
-      // this.items = items;
       this.itemsSubjector.next(items);
     });
   }

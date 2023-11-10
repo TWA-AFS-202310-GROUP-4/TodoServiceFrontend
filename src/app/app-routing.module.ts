@@ -15,8 +15,8 @@ const routes: Routes = [
   },
   {
     path: 'edit/:id',
-    component: ItemEditComponent
-  }
+    component: ItemEditComponent,
+  },
 ];
 
 @NgModule({

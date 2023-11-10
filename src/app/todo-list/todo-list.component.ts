@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ToDoItem } from 'src/model/ToDoItem';
 import { TodoService } from '../service/todo.service';
 import { Route, Router } from '@angular/router';
-import { TodoHttpService } from '../service/todo-service.service';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -18,8 +17,6 @@ export class TodoListComponent {
   constructor(private todoService: TodoService, private router: Router) {}
 
   ngOnInit() {
-    // this.items = this.todoService.getAll();
-    // this.todoHttpService.getAll().subscribe((items) => (this.items = items));
     this.itemsSubjector = this.todoService.getSubjector();
     this.todoService.refreshList();
   }

@@ -1,10 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-
 import { TodoService } from './todo.service';
-import { ToDoItem } from 'src/model/ToDoItem';
 import { TodoHttpService } from './todo-service.service';
 import { asyncData } from './todo-service.service.spec';
-import { servicesVersion } from 'typescript';
 
 describe('TodoService', () => {
   let service: TodoService;
@@ -19,7 +16,13 @@ describe('TodoService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({});
 
-    httpClientSpy = jasmine.createSpyObj('TodoHttpService', ['getAll']);
+    httpClientSpy = jasmine.createSpyObj('TodoHttpService', [
+      'getAll',
+      'create',
+      'remove',
+      'update',
+      'getById',
+    ]);
     service = new TodoService(httpClientSpy);
   });
 
@@ -36,28 +39,56 @@ describe('TodoService', () => {
     );
   });
 
-  // it('should get all items when call getAll', () => {
-  //   const items = service.getAll();
+  it('should create item when call createOne', () => {
+    httpClientSpy.create.and.returnValue(asyncData(oneItem));
+    httpClientSpy.getAll.and.returnValue(asyncData([oneItem]));
 
-  //   expect(items).toEqual([oneItem]);
-  // });
+    service.createOne(oneItem.title, oneItem.description);
 
-  // it('should create a new item when call createOneItem given title and string', () => {
-  //   const item: ToDoItem = {
-  //     id: 1,
-  //     title: '1',
-  //     description: '1',
-  //     isDone: false,
-  //   };
+    expect(httpClientSpy.create.calls.count()).toEqual(1);
+  });
 
-  //   service.createOneItem(item.title, item.description);
+  it('should delete item when call removeOne', () => {
+    httpClientSpy.create.and.returnValue(asyncData(oneItem));
+    httpClientSpy.getAll.and.returnValue(asyncData([oneItem]));
+    httpClientSpy.remove.and.returnValue(asyncData(oneItem));
 
-  //   expect(service.items).toEqual([oneItem, item]);
-  // });
+    service.removeOne(oneItem.id);
 
-  // it('should mark a item done when call markDone given id', () => {
-  //   service.markDone(0);
+    expect(httpClientSpy.remove.calls.count()).toEqual(1);
+  });
 
-  //   expect(service.items[0].isDone).toBeTrue();
-  // });
+  it('should mark done when call markDone', () => {
+    httpClientSpy.create.and.returnValue(asyncData(oneItem));
+    httpClientSpy.getAll.and.returnValue(asyncData([oneItem]));
+    httpClientSpy.remove.and.returnValue(asyncData(oneItem));
+    httpClientSpy.getById.and.returnValue(asyncData(oneItem));
+    httpClientSpy.update.and.returnValue(asyncData(oneItem));
+
+    service.markDone(oneItem.id);
+
+    expect(httpClientSpy.getById.calls.count()).toEqual(1);
+  });
+
+  it('should update content when call updateTitleDescription', () => {
+    httpClientSpy.getById.and.returnValue(asyncData(oneItem));
+    httpClientSpy.getAll.and.returnValue(asyncData([oneItem]));
+    httpClientSpy.update.and.returnValue(asyncData(oneItem));
+
+    service.updateTitleDescription(
+      oneItem.id,
+      oneItem.title,
+      oneItem.description
+    );
+
+    expect(httpClientSpy.getById.calls.count()).toEqual(1);
+  });
+
+  it('should get item when call getItemById', () => {
+    httpClientSpy.getById.and.returnValue(asyncData(oneItem));
+
+    service.getItemById(oneItem.id);
+
+    expect(httpClientSpy.getById.calls.count()).toEqual(1);
+  });
 });
