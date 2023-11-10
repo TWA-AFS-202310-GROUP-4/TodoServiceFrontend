@@ -1,1 +1,7 @@
-<p>todo-detail works!</p>
+<div>Todo detail</div>
+<div *ngIf="item">
+  <div>Id {{ item.id }}</div>
+  <div>title {{ item.title }}</div>
+  <div>Description {{ item.description }}</div>
+  <div>isDone {{ item.isDone }}</div>
+</div>

@@ -14,9 +14,8 @@ export class TodoDetailComponent {
   constructor(private activateRoute:ActivatedRoute,private todoservice:TodoService){}
 
   ngOnInit(){
-    const id = this.activateRoute.snapshot.paramMap.get('deatilId')
+    const id = this.activateRoute.snapshot.paramMap.get('detailId')
     this.item = this.todoservice.getDetailById(Number(id))
-    console.log(id)
   }
 
 }

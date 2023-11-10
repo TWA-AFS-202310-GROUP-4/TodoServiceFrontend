@@ -32,7 +32,7 @@ export class TodoService {
     });
   }
 
-  markdown(id: number) {
+  markdone(id: number) {
     const currentItem = this.items.find((item) => item.id === id);
     if (currentItem) {
       currentItem.isDone = true;

@@ -1,4 +1,3 @@
-<a routerLink="">TodoList</a>
 <h2>ToDoList</h2>
 
 <table>
@@ -15,9 +14,8 @@
     <td>{{ item.description }}</td>
     <td>{{ item.isDone }}</td>
     <td>
-      <button (click)="markdown(item.id)" [disabled]="item.isDone">Done</button>
-      <button>View Detail</button>
-
+      <button (click)="markdone(item.id)" [disabled]="item.isDone">Done</button>
+      <button (click)="gotodetail(item.id)">View Detail</button>
     </td>
   </tr>
 </table>
