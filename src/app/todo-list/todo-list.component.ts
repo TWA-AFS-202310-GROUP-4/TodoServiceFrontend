@@ -19,6 +19,10 @@ export class TodoListComponent {
 
   ngOnInit() {
     // this.items = this.todoService.getAll();
+    this.refreshList();
+  }
+
+  refreshList() {
     this.todoHttpService.getAll().subscribe(todoitems => this.items = todoitems)
   }
 
