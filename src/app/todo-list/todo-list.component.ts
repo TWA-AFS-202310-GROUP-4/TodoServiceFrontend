@@ -24,6 +24,11 @@ export class TodoListComponent {
       this.items = todoItems
     })
   }
+  refreshList(){
+    this.todoHttpService.getAll().subscribe(todoItems =>{
+      this.items = todoItems
+    })
+  }
 
   onMarkDone(id:number){
     this.todoService.markDone(id)
