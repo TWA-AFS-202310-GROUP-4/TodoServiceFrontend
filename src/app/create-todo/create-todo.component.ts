@@ -8,19 +8,21 @@ import { TodoService } from '../service/todo.service';
   styleUrls: ['./create-todo.component.css'],
 })
 export class CreateTodoComponent {
-  constructor(private formBuilder: FormBuilder,
-    private todoService:TodoService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private todoService: TodoService
+  ) {}
 
   todoForm = this.formBuilder.group({
     title: '',
-    description: ''
+    description: '',
   });
 
   onSubmit() {
     const formValues = this.todoForm.value;
-    if(formValues.title && formValues.description){
-      this.todoService.create(formValues.title, formValues.description)
-      this.todoForm.reset()
+    if (formValues.title && formValues.description) {
+      this.todoService.create(formValues.title, formValues.description);
+      this.todoForm.reset();
     }
   }
 }
