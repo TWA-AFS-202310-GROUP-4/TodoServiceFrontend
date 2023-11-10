@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoDetailComponent } from './todo-detail-component/todo-detail-component.component';
+import { ItemEditComponent } from './item-edit/item-edit.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
     path: 'detail/:id',
     component: TodoDetailComponent,
   },
+  {
+    path: 'edit/:id',
+    component: ItemEditComponent
+  }
 ];
 
 @NgModule({

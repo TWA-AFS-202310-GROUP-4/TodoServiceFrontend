@@ -1,6 +1,11 @@
 <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
-    <input formControlName="title"/>
-    <input formControlName="description"/>
+    <!-- <input formControlName="title"/> -->
+    <div>
+        <input formControlName="title" class="title"/>
+      </div>
+      <div>
+        <input formControlName="description" class="description"/>
+      </div>
     <button type="submit" >
         Add
     </button>

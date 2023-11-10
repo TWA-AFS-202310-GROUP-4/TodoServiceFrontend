@@ -9,8 +9,8 @@ import { ToDoItem } from 'src/model/ToDoItem';
   styleUrls: ['./todo-detail-component.component.css'],
 })
 export class TodoDetailComponent {
-  item: ToDoItem | undefined
-  
+  item: ToDoItem | undefined;
+
   constructor(
     private activatedRouter: ActivatedRoute,
     private todoService: TodoService
@@ -21,6 +21,8 @@ export class TodoDetailComponent {
     if (!id) {
       return;
     }
-    this.item = this.todoService.getItemById(Number(id));
+    this.todoService
+      .getItemById(Number(id))
+      .subscribe((item) => (this.item = item));
   }
 }

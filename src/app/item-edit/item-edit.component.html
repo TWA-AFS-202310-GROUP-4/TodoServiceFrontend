@@ -1,0 +1,13 @@
+<h1>Todo Item Editor</h1>
+
+<form [formGroup]="todoForm" (ngSubmit)="onSubmit()" *ngIf="item">
+  <span> Please edit title: </span>
+  <div>
+    <input formControlName="title"/>
+  </div>
+  <span> Please edit description: </span>
+  <div>
+    <textarea formControlName="description" cols="27" rows="35"></textarea>
+  </div>
+  <button type="submit">Submit</button>
+</form>

@@ -1,47 +1,60 @@
 import { Injectable } from '@angular/core';
 import { ToDoItem } from 'src/model/ToDoItem';
+import { TodoHttpService } from './todo-service.service';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodoService {
-  items: ToDoItem[] = [
-    {
-      id: 0,
-      title: 't1',
-      description: 'd1',
-      isDone: false,
-    },
-    {
-      id: 1,
-      title: 't2',
-      description: 'd2',
-      isDone: false,
-    },
-  ];
-  constructor() {}
+  // items: ToDoItem[] = [];
+  itemsSubjector: Subject<ToDoItem[]> = new Subject<ToDoItem[]>();
+  constructor(private httpService: TodoHttpService) {}
 
-  getAll() {
-    return this.items;
+  getSubjector() {
+    return this.itemsSubjector;
   }
 
-  createOneItem(title: string, description: string) {
-    this.items.push({
-      id: this.items.length,
-      title: title,
-      description: description,
-      isDone: false,
+  refreshList() {
+    this.httpService.getAll().subscribe((items) => {
+      // this.items = items;
+      this.itemsSubjector.next(items);
     });
   }
 
-  markDone(id: number) {
-    const item = this.items.find((v) => v.id === id);
-    if (item) {
-      item.isDone = true;
-    }
+  createOne(title: string, description: string) {
+    this.httpService
+      .create({
+        title: title,
+        description: description,
+        isDone: false,
+      })
+      .subscribe(() => this.refreshList());
   }
 
-  getItemById(id: number){
-    return this.items.find(v => v.id === id)
+  removeOne(id: number) {
+    this.httpService.remove(id).subscribe(() => this.refreshList());
+  }
+
+  markDone(id: number) {
+    // const item = this.items.find((v) => v.id === id);
+    this.getItemById(id).subscribe((item) => {
+      if (item) {
+        item.isDone = true;
+        this.httpService.update(item).subscribe(() => this.refreshList());
+      }
+    });
+  }
+
+  updateTitleDescription(id: number, title: string, description: string) {
+    this.getItemById(id).subscribe((item) => {
+      item.description = description;
+      item.title = title;
+      this.httpService.update(item).subscribe((_) => this.refreshList());
+    });
+  }
+
+  getItemById(id: number) {
+    return this.httpService.getById(id);
   }
 }

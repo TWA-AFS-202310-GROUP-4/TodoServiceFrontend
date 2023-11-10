@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { TodoService } from '../service/todo.service';
+import { TodoHttpService } from '../service/todo-service.service';
 
 @Component({
   selector: 'app-create-todo',
@@ -8,6 +9,9 @@ import { TodoService } from '../service/todo.service';
   styleUrls: ['./create-todo.component.css'],
 })
 export class CreateTodoComponent {
+  @Output()
+  created = new EventEmitter();
+
   constructor(
     private formBuilder: FormBuilder,
     private todoService: TodoService
@@ -21,8 +25,11 @@ export class CreateTodoComponent {
   onSubmit() {
     const formValue = this.todoForm.value;
     if (formValue.title && formValue.description) {
-      this.todoService.createOneItem(formValue.title, formValue.description);
+      // this.todoService.createOneItem(formValue.title, formValue.description);
+      this.todoService.createOne(formValue.title, formValue.description);
+      this.todoForm.reset();
+    }else{
+      alert("Please input legal description and title!")
     }
-    this.todoForm.reset()
   }
 }
