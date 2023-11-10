@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {FormBuilder} from '@angular/forms';
+import {TodoService } from '../service/todo.service'
 
 @Component({
   selector: 'app-create-todo',
@@ -7,7 +8,10 @@ import {FormBuilder} from '@angular/forms';
   styleUrls: ['./create-todo.component.css']
 })
 export class CreateTodoComponent {
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder : FormBuilder,
+    private todoService : TodoService
+  ) { }
 
   todoForm = this.formBuilder.group({
     title : "",
@@ -16,8 +20,10 @@ export class CreateTodoComponent {
 
   onSubmit() {
     const formValue = this.todoForm.value
-
-    console.log(formValue);
+    if (formValue.title && formValue.description) {
+      this.todoService.create(formValue.title, formValue.description)
+    }
+    this.todoForm.reset();
   }
     
 }
