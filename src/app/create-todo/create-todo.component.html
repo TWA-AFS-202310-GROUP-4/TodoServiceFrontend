@@ -1,7 +1,7 @@
-<form>
-    <input />
-    <input />
-    <button type="submit">
+<form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+    <input formControlName="title"/>
+    <input formControlName="description"/>
+    <button type="submit" >
         Add
     </button>
 </form>
