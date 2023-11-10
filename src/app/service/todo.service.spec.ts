@@ -29,4 +29,20 @@ describe('TodoService', () => {
         isDone: false
       }])
   })
+
+  it('should create new item when call create', () => {
+    service.create('new item', 'new item description') 
+    expect(service.items).toEqual([{
+        id: 1,
+        title: 'milk',
+        description: "Buy milk",
+        isDone: false
+    }, 
+    {
+      id: 2,
+      title: 'new item',
+      description: 'new item description',
+      isDone: false
+    }])
+  })
 });
