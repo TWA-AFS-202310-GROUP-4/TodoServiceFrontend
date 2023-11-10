@@ -34,7 +34,7 @@ describe('TodoService', () => {
   
   it('should make isDone = true when call markdown', () => {
 
-    service.markdown(1);
+    service.markdone(1);
     expect(service.items).toEqual([
       {
         id: 1,

@@ -15,9 +15,11 @@
     <td>{{ item.isDone }}</td>
     <td>
       <button (click)="markdone(item.id)" [disabled]="item.isDone">Done</button>
-      <button (click)="gotodetail(item.id)">View Detail</button>
+      <button (click)="gotodetail(item.id)">Detail</button>
+      <button>Delete</button>
+      <button>Edit</button>
     </td>
   </tr>
 </table>
 
-<app-creat-todo></app-creat-todo>
+<app-creat-todo (created)="refresh()"></app-creat-todo>

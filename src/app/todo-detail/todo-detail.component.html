@@ -1,7 +1,15 @@
 <div>Todo detail</div>
 <div *ngIf="item">
-  <div>Id {{ item.id }}</div>
-  <div>title {{ item.title }}</div>
-  <div>Description {{ item.description }}</div>
-  <div>isDone {{ item.isDone }}</div>
+  <tr>
+    <th>Id</th>
+    <th>title</th>
+    <th>Description</th>
+    <th>isDone</th>
+  </tr>
+  <tr>
+    <td>{{ item.id }}</td>
+    <td>{{ item.title }}</td>
+    <td>{{ item.description }}</td>
+    <td>{{ item.isDone }}</td>
+  </tr>
 </div>
