@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { ToDoItem } from 'src/model/ToDoItem';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TodoService {
-
-  constructor() { }
+  constructor() {}
   items: ToDoItem[] = [
     {
       id: 1,
@@ -21,23 +20,22 @@ export class TodoService {
       isDone: false,
     },
   ];
-  getAll(){
-    return this.items
+  getAll() {
+    return this.items;
   }
-  creat(title:string,description:string){
-      this.items.push({
-        id : this.items.length+1,
-        title: title,
-        description : description,
-        isDone: false
-      })
+  creat(title: string, description: string) {
+    this.items.push({
+      id: this.items.length + 1,
+      title: title,
+      description: description,
+      isDone: false,
+    });
   }
 
-  markdown(id:number){
-    const currentItem = this.items.find(item => item.id === id)
-    if(currentItem)
-    {
-      currentItem.isDone = true
+  markdown(id: number) {
+    const currentItem = this.items.find((item) => item.id === id);
+    if (currentItem) {
+      currentItem.isDone = true;
     }
   }
 }
