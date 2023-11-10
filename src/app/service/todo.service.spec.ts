@@ -13,7 +13,7 @@ describe('TodoService', () => {
         id : 1,
         title : 'hh',
         description : 'hh',
-        isDone : true
+        isDone : false
       }
     ];
   });
@@ -24,6 +24,40 @@ describe('TodoService', () => {
 
   it('should get all items when call getAll', () => {
     service.getAll();
-    expect(service.items).toEqual(service.items);
+    expect(service.items).toEqual(
+      [
+      {
+        id : 1,
+        title : 'hh',
+        description : 'hh',
+        isDone : false
+      }
+    ]
+    );
+  });
+
+  it('should get all items when call create method', () => {
+    service.create("hhhhh", "hhhhhhhhhhhhh");
+    expect(service.items).toEqual(
+      [
+        {
+          id : 1,
+          title : 'hh',
+          description : 'hh',
+          isDone : false
+        },
+        {
+          id : 2,
+          title : "hhhhh",
+          description : "hhhhhhhhhhhhh",
+          isDone : false
+        }
+      ]
+    );
+  });
+
+  it('should mark item done when call markDone method', () => {
+    service.markDone(1);
+    expect(service.items[0].isDone).toEqual(true);
   });
 });
