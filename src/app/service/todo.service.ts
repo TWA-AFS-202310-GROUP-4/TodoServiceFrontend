@@ -24,4 +24,13 @@ export class TodoService {
   getAll(){
     return this.items
   }
+
+  createOneItem(title: string, description: string){
+    this.items.push({
+      id: this.items.length,
+      title: title,
+      description: description,
+      isDone: false
+    })
+  }
 }
