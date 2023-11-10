@@ -45,4 +45,14 @@ describe('TodoService', () => {
       isDone: false
     }])
   })
+
+  it('should mark item as done when call markDone', () => {
+    service.markDone(1)
+    expect(service.items).toEqual([{
+      id: 1,
+      title: 'milk',
+      description: "Buy milk",
+      isDone: true
+    }])
+  })
 });
