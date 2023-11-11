@@ -20,8 +20,11 @@ export class TodoListComponent {
     this.refreshTodoList();
   }
 
-  onMarkDone(id: number) {
-    this.todoService.markDone(id);
+  onMarkDone(id: number, item: ToDoItem) {
+    item.isDone = true;
+    this.todoHttpService.updateItemInfo(id, item).subscribe(() => {
+      this.refreshTodoList();
+    });
   }
 
   viewDetail(id: number) {

@@ -21,4 +21,9 @@ export class TodoHttpService {
       isDone: false,
     });
   }
+
+  updateItemInfo(id: number, updateItem: ToDoItem) {
+    const url = this.baseurl + id;
+    return this.httpClient.put(url, JSON.stringify(updateItem));
+  }
 }

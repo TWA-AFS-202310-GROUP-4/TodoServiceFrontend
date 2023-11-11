@@ -13,7 +13,7 @@ describe('TodoHttpService', () => {
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
 
   beforeEach(() => {
-    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post']);
+    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put']);
     service = new TodoHttpService(httpClientSpy);
   });
 
@@ -50,6 +50,33 @@ describe('TodoHttpService', () => {
 
     service
       .createNewItem('Homework', 'Have to complete home work')
+      .subscribe((data) => {
+        expect(data).toEqual({
+          id: 0,
+          title: 'Homework',
+          description: 'Have to complete home work',
+          isDone: false,
+        });
+      });
+  });
+
+  it('should update item isDone to true when updateItemInfo given todolist component markDone', () => {
+    httpClientSpy.put.and.returnValue(
+      asyncData({
+        id: 0,
+        title: 'Homework',
+        description: 'Have to complete home work',
+        isDone: false,
+      })
+    );
+
+    service
+      .updateItemInfo(0, {
+        id: 0,
+        title: 'Homework',
+        description: 'Have to complete home work',
+        isDone: false,
+      })
       .subscribe((data) => {
         expect(data).toEqual({
           id: 0,

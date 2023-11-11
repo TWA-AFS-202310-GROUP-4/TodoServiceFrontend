@@ -13,7 +13,7 @@
     <td>{{ item.description }}</td>
     <td>{{ item.isDone }}</td>
     <td>
-      <button [disabled]="item.isDone" (click)="onMarkDone(item.id)">
+      <button [disabled]="item.isDone" (click)="onMarkDone(item.id, item)">
         Done
       </button>
       <button (click)="viewDetail(item.id)">View Detail</button>
