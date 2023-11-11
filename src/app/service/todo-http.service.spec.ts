@@ -12,9 +12,15 @@ describe('TodoHttpService', () => {
   let service: TodoHttpService;
   let httpClientSpy: jasmine.SpyObj<HttpClient>
 
+  let postService: TodoHttpService;
+  let httpClientSpyPost: jasmine.SpyObj<HttpClient>
+
   beforeEach(() => {
-    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get'])
+    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get'], ['post'])
     service = new TodoHttpService(httpClientSpy)
+
+    httpClientSpyPost = jasmine.createSpyObj('HttpClient', ['post'])
+    postService = new TodoHttpService(httpClientSpyPost)
   });
 
   it('should be created', () => {
@@ -25,10 +31,10 @@ describe('TodoHttpService', () => {
     httpClientSpy.get.and.returnValue(asyncData(
       [
         {
-            "id": 0,
-            "title": "Home work",
-            "description": "Have to complete home work",
-            "isDone": false
+          "id": 0,
+          "title": "Home work",
+          "description": "Have to complete home work",
+          "isDone": false
         }
     ]))
 
@@ -37,5 +43,38 @@ describe('TodoHttpService', () => {
     })
 
     expect(httpClientSpy.get.calls.count()).toEqual(1)
+  })
+
+  it('should create an item when call create given an item', () => {
+    httpClientSpyPost.post.and.returnValue(asyncData(
+      {
+        "id": 0,
+        "title": "test",
+        "description": "test description",
+        "isDone": false
+      }
+    ))
+
+    postService.create("test", "test description").subscribe(data => {
+      expect(data.title).toBe("test")
+      expect(data.description).toBe("test description")
+      expect(data.isDone).toBe(false)
+    })
+  })
+
+  it('should find an item when can getItemById given an item', () => {
+    httpClientSpy.get.and.returnValue(asyncData(
+      {
+        "id": 0,
+        "title": "target",
+        "description": "target description",
+        "isDone": false
+      }))
+
+    service.getItemById(0).subscribe(data => {
+      expect(data.title).toBe("target")
+      expect(data.description).toBe("target description")
+      expect(data.isDone).toBe(false)
+      })
   })
 });

@@ -14,11 +14,15 @@ export class TodoHttpService {
   }
 
   create(title: string, description: string) {
-    return this.httpClient.post('https://localhost:44309/ToDoItem', 
+    return this.httpClient.post<ToDoItem>('https://localhost:44309/ToDoItem', 
     {
       title: title,
       description: description,
       isDone:false
     })
+  }
+
+  getItemById(id: number) {
+    return this.httpClient.get<ToDoItem>('https://localhost:44309/ToDoItem/' + id)
   }
 }
