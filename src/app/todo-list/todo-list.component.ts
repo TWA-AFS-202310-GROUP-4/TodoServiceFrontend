@@ -24,6 +24,7 @@ export class TodoListComponent {
       this.items = todoItems
     })
   }
+
   refreshList(){
     this.todoHttpService.getAll().subscribe(todoItems =>{
       this.items = todoItems
@@ -36,5 +37,12 @@ export class TodoListComponent {
 
   onGoToDetail(id: number){
     this.router.navigateByUrl(`/detail/${id}`)
+  }
+  onRemove(id: number){
+    this.todoHttpService.delete(id).subscribe()
+    const index = this.items.findIndex(item=> item.id === id)
+    if(index != undefined){
+      this.items.splice(index,1)
+    }
   }
 }
