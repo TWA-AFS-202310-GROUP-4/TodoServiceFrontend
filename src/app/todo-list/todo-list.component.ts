@@ -17,9 +17,7 @@ export class TodoListComponent {
   ){}
 
   ngOnInit(){
-    this.todoHttpService.getAll().subscribe(todoItems=>{
-      this.items = todoItems
-    })
+    this.refreshList()
   }
 
   refreshList(){
@@ -31,9 +29,9 @@ export class TodoListComponent {
   onMarkDone(id:number){
     const itemindex = this.items.findIndex(itemUpdate => itemUpdate.id === id)
     if(itemindex >= 0){
-      this.items[itemindex].isDone = true
-      this.todoHttpService.put(id,this.items[itemindex]).subscribe()
-
+      this.todoHttpService.put(id,this.items[itemindex]).subscribe(data=>{
+        this.items[itemindex] = data
+      })
     }
   }
 
@@ -41,10 +39,9 @@ export class TodoListComponent {
     this.router.navigateByUrl(`/detail/${id}`)
   }
   onRemove(id: number){
-    this.todoHttpService.delete(id).subscribe()
-    const index = this.items.findIndex(item=> item.id === id)
-    if(index != undefined){
-      this.items.splice(index,1)
-    }
+    this.todoHttpService.delete(id).subscribe(()=>{
+      this.refreshList()
+    })
+
   }
 }
