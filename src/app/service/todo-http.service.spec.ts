@@ -87,6 +87,33 @@ describe('TodoHttpService', () => {
       });
   });
 
+  it('should update item title and descriptionwhen updateItemInfo given todo-detail update', () => {
+    httpClientSpy.put.and.returnValue(
+      asyncData({
+        id: 0,
+        title: 'updateHomeWork',
+        description: 'we Have to complete home work',
+        isDone: false,
+      })
+    );
+
+    service
+      .updateItemInfo(0, {
+        id: 0,
+        title: 'updateHomeWork',
+        description: 'we Have to complete home work',
+        isDone: false,
+      })
+      .subscribe((data) => {
+        expect(data).toEqual({
+          id: 0,
+          title: 'updateHomeWork',
+          description: 'we Have to complete home work',
+          isDone: false,
+        });
+      });
+  });
+
   it('should get correct item when call getItemById', () => {
     httpClientSpy.get.and.returnValue(
       asyncData({
