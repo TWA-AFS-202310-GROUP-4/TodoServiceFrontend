@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToDoItem } from 'src/model/ToDoItem';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { TodoHttpService } from '../service/todo-http.service';
 
 @Component({
@@ -11,12 +11,19 @@ import { TodoHttpService } from '../service/todo-http.service';
 })
 export class TodoDetailComponent {
   item: ToDoItem | undefined;
+  todoForm: any;
   constructor(
     private activityRouter: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private todoHttpService: TodoHttpService
-  ) {}
-  todoForm: any;
+    private todoHttpService: TodoHttpService,
+    private todoFormGroup:FormBuilder
+  ) {
+    this.todoForm = this.todoFormGroup.group({
+      title: ['', Validators.required],
+      description: ['', [Validators.required,this.nonEmptyValidator]]
+      // other form controls
+    });
+  }
 
   ngOnInit() {
     const id = this.activityRouter.snapshot.paramMap.get('detailId');
@@ -39,5 +46,9 @@ export class TodoDetailComponent {
           this.item = itemUpdated;
         });
     }
+  }
+  nonEmptyValidator(control: { value: string; }) {
+    const value = control.value.trim(); // trim to handle spaces
+    return value ? null : { empty: true };
   }
 }

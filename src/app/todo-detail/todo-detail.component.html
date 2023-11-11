@@ -3,11 +3,17 @@
   <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
     <div>
       Title:
-      <input type="text" formControlName="title" />
+      <input type="text" formControlName="title" required />
+    </div>
+    <div class ="error" *ngIf="todoForm.get('title')?.hasError('required') && todoForm.get('title')?.touched">
+      Title should be non empty.
     </div>
     <div>
       Description:
-      <input type="text" formControlName="description" />
+      <input type="text" formControlName="description" required/>
+    </div>
+    <div class ="error" *ngIf="todoForm.get('description')?.hasError('required') && todoForm.get('description')?.touched">
+      Description should be non empty.
     </div>
     <div >
       IsDone:

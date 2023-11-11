@@ -36,3 +36,7 @@ input {
 .done{
   background-color: rgb(185, 211, 218);
 }
+
+.error{
+  color:red
+}
