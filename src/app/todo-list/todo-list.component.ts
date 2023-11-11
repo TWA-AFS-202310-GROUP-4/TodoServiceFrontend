@@ -17,9 +17,7 @@ export class TodoListComponent {
   ) {}
   todoList: ToDoItem[] = [];
   ngOnInit() {
-    this.todoHttpService.getAll().subscribe((res) => {
-      this.todoList = res;
-    });
+    this.refreshTodoList();
   }
 
   onMarkDone(id: number) {
@@ -28,5 +26,11 @@ export class TodoListComponent {
 
   viewDetail(id: number) {
     this.router.navigateByUrl(`/detail/${id}`);
+  }
+
+  refreshTodoList() {
+    this.todoHttpService.getAll().subscribe((res) => {
+      this.todoList = res;
+    });
   }
 }

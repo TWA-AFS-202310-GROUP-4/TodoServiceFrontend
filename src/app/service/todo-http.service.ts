@@ -13,4 +13,12 @@ export class TodoHttpService {
   getAll() {
     return this.httpClient.get<ToDoItem[]>(this.baseurl);
   }
+
+  createNewItem(title: string, description: string) {
+    return this.httpClient.post(this.baseurl, {
+      title: title,
+      description: description,
+      isDone: false,
+    });
+  }
 }
