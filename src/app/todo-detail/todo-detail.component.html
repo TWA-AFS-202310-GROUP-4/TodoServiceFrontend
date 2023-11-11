@@ -1,15 +1,19 @@
-<div>Todo Detail</div>
+<div class = "header">Todo Detail</div>
 <div *ngIf="item">
   <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
     <div>
+      Title:
       <input type="text" formControlName="title" />
     </div>
     <div>
+      Description:
       <input type="text" formControlName="description" />
     </div>
-    <div>
-      <div>Isdone: {{ item.isDone }}</div>
+    <div >
+      IsDone:
+      <input type = "text" value = {{item.isDone}} readonly class = "done">
     </div>
     <button type="submit">Update</button>
   </form>
 </div>
+
