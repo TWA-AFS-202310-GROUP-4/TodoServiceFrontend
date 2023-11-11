@@ -1,6 +1,15 @@
 <div>Todo Detail</div>
 <div *ngIf="item">
-  <div>Ttile:  {{item.title}}</div>
-  <div>Description:  {{item.description}}</div>
-  <div>Isdone:  {{item.isDone}}</div>
+  <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+    <div>
+      <input type="text" formControlName="title" />
+    </div>
+    <div>
+      <input type="text" formControlName="description" />
+    </div>
+    <div>
+      <div>Isdone: {{ item.isDone }}</div>
+    </div>
+    <button type="submit">Update</button>
+  </form>
 </div>
