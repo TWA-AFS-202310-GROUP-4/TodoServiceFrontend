@@ -38,7 +38,7 @@ describe('TodoHttpService', () => {
     });
   });
 
-  it('should get new item when create new item', () => {
+  it('should create new item when create new item', () => {
     httpClientSpy.post.and.returnValue(
       asyncData({
         id: 0,
@@ -85,5 +85,25 @@ describe('TodoHttpService', () => {
           isDone: false,
         });
       });
+  });
+
+  it('should get correct item when call getItemById', () => {
+    httpClientSpy.get.and.returnValue(
+      asyncData({
+        id: 0,
+        title: 'Home work',
+        description: 'Have to complete home work',
+        isDone: false,
+      })
+    );
+
+    service.getItemById(0).subscribe((data) => {
+      expect(data).toEqual({
+        id: 0,
+        title: 'Home work',
+        description: 'Have to complete home work',
+        isDone: false,
+      });
+    });
   });
 });

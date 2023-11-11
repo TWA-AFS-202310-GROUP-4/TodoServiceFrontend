@@ -15,7 +15,7 @@ export class TodoHttpService {
   }
 
   createNewItem(title: string, description: string) {
-    return this.httpClient.post(this.baseurl, {
+    return this.httpClient.post<ToDoItem>(this.baseurl, {
       title: title,
       description: description,
       isDone: false,
@@ -23,7 +23,11 @@ export class TodoHttpService {
   }
 
   updateItemInfo(id: number, updateItem: ToDoItem) {
-    const url = this.baseurl + id;
-    return this.httpClient.put(url, JSON.stringify(updateItem));
+    const url = this.baseurl + '/' + id;
+    return this.httpClient.put<ToDoItem>(url, updateItem);
+  }
+  getItemById(id: number) {
+    const url = this.baseurl + '/' + id;
+    return this.httpClient.get<ToDoItem>(url);
   }
 }
