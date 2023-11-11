@@ -1,0 +1,25 @@
+<div class = "header">Todo Detail</div>
+<div *ngIf="item">
+  <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+    <div>
+      Title:
+      <input type="text" formControlName="title" required />
+    </div>
+    <div class ="error" *ngIf="todoForm.get('title')?.hasError('required') && todoForm.get('title')?.touched">
+      Title should be non empty.
+    </div>
+    <div>
+      Description:
+      <input type="text" formControlName="description" required/>
+    </div>
+    <div class ="error" *ngIf="todoForm.get('description')?.hasError('required') && todoForm.get('description')?.touched">
+      Description should be non empty.
+    </div>
+    <div >
+      IsDone:
+      <input type = "text" value = {{item.isDone}} readonly class = "done">
+    </div>
+    <button type="submit">Update</button>
+  </form>
+</div>
+
