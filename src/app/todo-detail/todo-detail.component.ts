@@ -29,6 +29,7 @@ export class TodoDetailComponent {
     this.service
       .updateItemInfo(Number(this.item.id), this.item)
       .subscribe(() => {
+        alert('Update success');
         this.router.navigate(['']);
       });
   }

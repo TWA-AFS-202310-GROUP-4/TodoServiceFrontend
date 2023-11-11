@@ -37,6 +37,7 @@ export class TodoListComponent {
 
   deleteItem(id: number) {
     this.todoHttpService.deleteItemById(id).subscribe(() => {
+      alert('delete success');
       this.refreshTodoList();
     });
   }
