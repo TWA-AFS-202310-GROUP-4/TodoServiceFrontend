@@ -36,4 +36,10 @@ export class TodoListComponent {
       this.todoList = res;
     });
   }
+
+  deleteItem(id: number) {
+    this.todoHttpService.deleteItemById(id).subscribe(() => {
+      this.refreshTodoList();
+    });
+  }
 }

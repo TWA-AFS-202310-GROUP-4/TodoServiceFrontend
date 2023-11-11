@@ -26,8 +26,14 @@ export class TodoHttpService {
     const url = this.baseurl + '/' + id;
     return this.httpClient.put<ToDoItem>(url, updateItem);
   }
+
   getItemById(id: number) {
     const url = this.baseurl + '/' + id;
     return this.httpClient.get<ToDoItem>(url);
+  }
+
+  deleteItemById(id: number) {
+    const url = this.baseurl + '/' + id;
+    return this.httpClient.delete<ToDoItem>(url);
   }
 }

@@ -13,7 +13,12 @@ describe('TodoHttpService', () => {
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
 
   beforeEach(() => {
-    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put']);
+    httpClientSpy = jasmine.createSpyObj('HttpClient', [
+      'get',
+      'post',
+      'put',
+      'delete',
+    ]);
     service = new TodoHttpService(httpClientSpy);
   });
 
@@ -125,6 +130,26 @@ describe('TodoHttpService', () => {
     );
 
     service.getItemById(0).subscribe((data) => {
+      expect(data).toEqual({
+        id: 0,
+        title: 'Home work',
+        description: 'Have to complete home work',
+        isDone: false,
+      });
+    });
+  });
+
+  it('should delete item when call deleteItemById', () => {
+    httpClientSpy.delete.and.returnValue(
+      asyncData({
+        id: 0,
+        title: 'Home work',
+        description: 'Have to complete home work',
+        isDone: false,
+      })
+    );
+
+    service.deleteItemById(0).subscribe((data) => {
       expect(data).toEqual({
         id: 0,
         title: 'Home work',
