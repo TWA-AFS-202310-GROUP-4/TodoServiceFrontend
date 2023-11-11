@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ToDoItem } from 'src/model/ToDoItem';
-import { TodoService } from '../service/todo.service';
 import { Router } from '@angular/router';
 import { TodoHttpService } from '../service/todo-http.service';
 
@@ -13,13 +12,11 @@ export class TodoListComponent {
   items: ToDoItem[] = []
 
   constructor(
-    private todoService:TodoService,
     private todoHttpService:TodoHttpService,
     private router:Router
   ){}
 
   ngOnInit(){
-   //this.items = this.todoService.getAll()
     this.todoHttpService.getAll().subscribe(todoItems=>{
       this.items = todoItems
     })
@@ -32,7 +29,12 @@ export class TodoListComponent {
   }
 
   onMarkDone(id:number){
-    this.todoService.markDone(id)
+    const itemindex = this.items.findIndex(itemUpdate => itemUpdate.id === id)
+    if(itemindex >= 0){
+      this.items[itemindex].isDone = true
+      this.todoHttpService.put(id,this.items[itemindex]).subscribe()
+
+    }
   }
 
   onGoToDetail(id: number){
