@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToDoItem } from 'src/model/ToDoItem';
-import { TodoService } from '../service/todo.service';
 import { FormBuilder } from '@angular/forms';
 import { TodoHttpService } from '../service/todo-http.service';
 
