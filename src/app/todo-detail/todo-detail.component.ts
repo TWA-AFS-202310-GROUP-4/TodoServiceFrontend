@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToDoItem } from 'src/model/ToDoItem';
 import { TodoHttpService } from '../service/todo-http.service';
 
