@@ -15,8 +15,9 @@
     <td>
       <button (click)="onMarkDone(item.id)" [disabled]="item.isDone">done</button>
       <button (click)="onGoToDetails(item.id)">view detail</button>
+      <button (click)="onDelete(item.id)" class="delete">delete</button>
     </td>
   </tr>
 </table>
 
-<app-create-todo (created)="refreshList()"></app-create-todo>
+<app-create-todo (created)="onRefreshList()"></app-create-todo>

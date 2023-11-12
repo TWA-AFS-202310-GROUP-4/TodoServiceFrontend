@@ -1,5 +1,8 @@
 <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
-    <input formControlName="title"/>
-    <input formControlName="description"/>
+    <input required placeholder="Title" formControlName="title" type="text">
+    <input required placeholder="Description" formControlName="description" type="text">
     <button type="submit">Add</button>
 </form>
+<div *ngIf="todoForm.touched && !todoForm.valid" class="alert alert-danger" role="alert">
+    A title and a description is required !
+</div>

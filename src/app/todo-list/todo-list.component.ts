@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import {ToDoItem } from '../../model/ToDoItem'
-import {TodoService } from '../service/todo.service'
+import { Component, OnDestroy } from '@angular/core';
+import { ToDoItem } from '../../model/ToDoItem';
 import { Router } from '@angular/router';
 import { TodoHttpService } from '../service/todo-http.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-todo-list',
@@ -11,26 +11,46 @@ import { TodoHttpService } from '../service/todo-http.service';
 })
 export class TodoListComponent {
   items : ToDoItem[] = []
+  private subscriptions: Subscription[] = [];
   constructor(
-    private todoService : TodoService,
     private router : Router,
     private todoHttpService : TodoHttpService
-  ) { }
-
-  ngOnInit() {
-    // this.items = this.todoService.getAll();
-    this.refreshList();
+  ) {
+    this.onRefreshList();
   }
 
-  refreshList() {
-    this.todoHttpService.getAll().subscribe(todoitems => this.items = todoitems)
+  ngOnInit() {
+    this.onRefreshList();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
+  }
+
+  onRefreshList() {
+    const sub = this.todoHttpService.getAll().subscribe((todoitems) => (this.items = todoitems))
+    this.subscriptions.push(sub)
   }
 
   onMarkDone(id : number) {
-    this.todoService.markDone(id);
+    const item = this.items.find((item) => item.id === id);
+    if (item) {
+      item.isDone = true;
+      const sub = this.todoHttpService.update(id, item).subscribe(() => this.onRefreshList());
+      this.subscriptions.push(sub);
+    }
+  }
+
+  onDelete(id: number) {
+    const sub = this.todoHttpService.delete(id).subscribe(() => this.onRefreshList());
+    this.subscriptions.push(sub);
+  }
+
+  trackItem(index: number, item: ToDoItem) {
+    return item.id;
   }
 
   onGoToDetails(id : number) {
-    this.router.navigateByUrl(`/detail/${id}`);
+    this.router.navigate(['/detail', id]);
   }
 }

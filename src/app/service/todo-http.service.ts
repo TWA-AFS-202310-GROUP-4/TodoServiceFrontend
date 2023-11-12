@@ -6,21 +6,30 @@ import { ToDoItem } from '../../model/ToDoItem';
   providedIn: 'root'
 })
 export class TodoHttpService {
-
+  private url: string;
   constructor(
     private httpClient : HttpClient
-  ) { }
-
-  getAll() {
-    return this.httpClient.get<ToDoItem[]>('https://localhost:44309/ToDoItem')
+  ) {
+    this.url = 'https://localhost:44309/ToDoItem';
   }
 
-  create(title : string, description : string) {
-    return this.httpClient.post('https://localhost:44309/ToDoItem', 
-      {
-        title : title,
-        description : description,
-        isDone : false
-      });
+  getAll() {
+    return this.httpClient.get<ToDoItem[]>(this.url);
+  }
+
+  create(item : ToDoItem) {
+    return this.httpClient.post(this.url, item);
+  }
+
+  getById(id : number){
+    return this.httpClient.get<ToDoItem>(this.url + `/${id}`)
+  }
+
+  delete(id : number) {
+    return this.httpClient.delete(this.url + `/${id}`);
+  }
+
+  update(id : number, item : ToDoItem) {
+    return this.httpClient.put(this.url + `/${id}`, item);
   }
 }
