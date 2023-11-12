@@ -57,7 +57,7 @@ describe('TodoHttpService', () => {
     expect(httpClientSpy.post.calls.count()).toEqual(1)
   })
 
-  it('should find an item when call getItemById given an item', () => {
+  it('should find an item when call getItemById given an id', () => {
     httpClientSpy.get.and.returnValue(asyncData(
       {
         "id": 0,
