@@ -29,4 +29,14 @@ export class TodoHttpService {
   deleteById(id: number) {
     return this.httpClient.delete<ToDoItem>('https://localhost:44309/ToDoItem/' + id)
   }
+
+  markDone(item: ToDoItem) {
+    return this.httpClient.put<ToDoItem>('https://localhost:44309/ToDoItem', 
+    {
+      id: item.id,
+      title: item.title,
+      description: item.description,
+      isDone: true
+    })
+  }
 }

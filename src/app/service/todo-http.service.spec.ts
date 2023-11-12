@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { TodoHttpService } from './todo-http.service';
 import { HttpClient } from '@angular/common/http';
 import { defer } from 'rxjs';
@@ -13,7 +12,7 @@ describe('TodoHttpService', () => {
   let httpClientSpy: jasmine.SpyObj<HttpClient>
 
   beforeEach(() => {
-    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'delete'])
+    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'delete', 'put'])
     service = new TodoHttpService(httpClientSpy)
   });
 
@@ -74,7 +73,7 @@ describe('TodoHttpService', () => {
       expect(data.isDone).toBe(false)
     })
 
-      expect(httpClientSpy.get.calls.count()).toEqual(1)
+    expect(httpClientSpy.get.calls.count()).toEqual(1)
   })
 
   it('should delete an item when call deleteItemById given an id', () => {
@@ -92,5 +91,24 @@ describe('TodoHttpService', () => {
       expect(data.description).toBe("target description")
       expect(data.isDone).toBe(false)
     })
+
+    expect(httpClientSpy.delete.calls.count()).toEqual(1)
+  })
+
+  it('should mark an item as Done when call markDone givne an item', () => {
+   
+    httpClientSpy.put.and.returnValue(asyncData(
+      {
+        "id": 0,
+        "title": "target",
+        "description": "target description",
+        "isDone": true
+      }
+    ))
+
+    service.markDone({"id": 0, "title": "target", "description": "target description","isDone": true
+    }).subscribe(data => { expect(data.isDone).toBe(true)})
+
+    expect(httpClientSpy.put.calls.count()).toEqual(1)
   })
 });
