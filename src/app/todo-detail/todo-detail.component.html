@@ -1,0 +1,14 @@
+<div class="todo-detail">
+  <div>Todo Detail</div>
+  <div *ngIf="item" class="details-container">
+    <div class="detail-item">Id: {{ item.id }}</div>
+    <div class="detail-item">
+      <label>Title:<input [(ngModel)]="item.title" /></label>
+    </div>
+    <div class="detail-item">
+      <label>Description:<input [(ngModel)]="item.description" /></label>
+    </div>
+    <div class="detail-item">IsDone: {{ item.isDone }}</div>
+    <button (click)="updateDetail()">Update Detail</button>
+  </div>
+</div>

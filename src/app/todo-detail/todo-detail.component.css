@@ -1,0 +1,23 @@
+.details-container {
+  border: 1px solid #ddd;
+  width: 400px;
+  padding: 30px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.todo-detail {
+  font-size: 20px;
+}
+.detail-item {
+  margin-bottom: 15px;
+  font-size: large;
+}
+
+label {
+  font-size: 18px;
+}
+
+input {
+  font-size: 16px;
+}
