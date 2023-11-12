@@ -40,6 +40,7 @@ describe('TodoHttpService', () => {
 
     service.getAll().subscribe((data) => {
       expect(data.length).toEqual(1);
+      expect(httpClientSpy.get.calls.count()).toEqual(1);
     });
   });
 
@@ -62,6 +63,7 @@ describe('TodoHttpService', () => {
           description: 'Have to complete home work',
           isDone: false,
         });
+        expect(httpClientSpy.post.calls.count()).toEqual(1);
       });
   });
 
@@ -89,6 +91,7 @@ describe('TodoHttpService', () => {
           description: 'Have to complete home work',
           isDone: false,
         });
+        expect(httpClientSpy.put.calls.count()).toEqual(1);
       });
   });
 
@@ -116,6 +119,7 @@ describe('TodoHttpService', () => {
           description: 'we Have to complete home work',
           isDone: false,
         });
+        expect(httpClientSpy.put.calls.count()).toEqual(1);
       });
   });
 
@@ -136,6 +140,7 @@ describe('TodoHttpService', () => {
         description: 'Have to complete home work',
         isDone: false,
       });
+      expect(httpClientSpy.get.calls.count()).toEqual(1);
     });
   });
 
@@ -156,6 +161,7 @@ describe('TodoHttpService', () => {
         description: 'Have to complete home work',
         isDone: false,
       });
+      expect(httpClientSpy.delete.calls.count()).toEqual(1);
     });
   });
 });
