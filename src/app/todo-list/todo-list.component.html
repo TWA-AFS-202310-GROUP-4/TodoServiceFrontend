@@ -1,0 +1,25 @@
+<h2>ToDoList</h2>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>IsDone</th>
+    <th>Action</th>
+  </tr>
+  <tr *ngFor="let item of items">
+    <td>{{ item.id }}</td>
+    <td>{{ item.title }}</td>
+    <td>{{ item.description }}</td>
+    <td>{{ item.isDone }}</td>
+    <td>
+      <button (click)="markdone(item)" [disabled]="item.isDone">Done</button>
+      <button (click)="gotodetail(item.id)">Detail</button>
+      <button (click)="deleteById(item.id)">Delete</button>
+      <button (click)="gotoedit(item.id)">Edit</button>
+    </td>
+  </tr>
+</table>
+
+<app-creat-todo (created)="refresh()"></app-creat-todo>
