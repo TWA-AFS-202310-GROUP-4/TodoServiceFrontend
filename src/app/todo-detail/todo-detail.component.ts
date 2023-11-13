@@ -22,8 +22,8 @@ export class TodoDetailComponent implements OnDestroy {
   NgOninit () {
     const id = this.activitedRouter.snapshot.paramMap.get('detailId');
     this.item$ = this.todoHttpService
-      .getById(Number(id))
-      .pipe(takeUntil(this.unsubscribe$));
+      .getById(Number(id)).subscribe();
+      // .pipe(takeUntil(this.unsubscribe$));
   }
 
   onSave(item: ToDoItem) {

@@ -22,14 +22,14 @@ export class TodoHttpService {
   }
 
   getById(id : number){
-    return this.httpClient.get<ToDoItem>(this.url + `/${id}`)
+    return this.httpClient.get<ToDoItem>(`${this.url}/${id}`)
   }
 
   delete(id : number) {
-    return this.httpClient.delete(this.url + `/${id}`);
+    return this.httpClient.delete(`${this.url}/${id}`);
   }
 
   update(id : number, item : ToDoItem) {
-    return this.httpClient.put(this.url + `/${id}`, item);
+    return this.httpClient.put(`${this.url}/${id}`, item);
   }
 }
