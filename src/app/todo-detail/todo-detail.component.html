@@ -1,0 +1,7 @@
+<div>Todo detail</div>
+<div *ngIf="(item$ | async) as item">
+    <div>Id: {{item.id}}</div>
+    <div>Title: {{item.title}}</div>
+    <div>Description: {{item.description}}</div>
+    <div>IsDone: {{item.isDone}}</div>
+</div>
